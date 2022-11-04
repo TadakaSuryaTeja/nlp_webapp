@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fill mask</title>
+</head>
+<body>
+<form action="/masked-word/" method="post">
+    {% csrf_token %}
+    <h1> Fill-Mask NLP Task:</h1>
+    <label for="sentence">Enter your sentence: </label>
+    <textarea id="sentence" name="sentence" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="OK">
+
+</form>
+{% if form %}
+    <ol>
+        {% for single_form in form %}
+            <li>{{ single_form.sequence }}</li>
+        {% endfor %}
+    </ol>
+<!--    <p>{{ form }}</p>-->
+{% endif %}
+
+</body>
+</html>
