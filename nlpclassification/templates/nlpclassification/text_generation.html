@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Generation</title>
+</head>
+<body>
+<form action="/text-generation/" method="post">
+    {% csrf_token %}
+    <h1>Text Generation NLP Task:</h1>
+    <label for="sentence">Enter your sentence: </label>
+    <textarea id="sentence" name="sentence" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="OK">
+
+</form>
+{% if form %}
+    <ol>
+        {% for single_form in form %}
+            <li>{{ single_form.generated_text }}</li>
+        {% endfor %}
+    </ol>
+<!--    <p>{{ form }}</p>-->
+{% endif %}
+
+</body>
+</html>

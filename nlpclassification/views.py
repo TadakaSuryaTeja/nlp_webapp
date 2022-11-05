@@ -1,9 +1,8 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render
 
 from nlpclassification.models import NameForm, FillMask
 from nlpclassification.nlp_models import question_answering_model, fill_mask_model, summarization_model, \
-    sentiment_analysis, zero_shot_classification_model
+    sentiment_analysis, text_generation_model, named_entity_recognition_model
 
 
 # Create your views here.
@@ -78,3 +77,26 @@ def sentiment_analysis_view(request):
             print("fprm invalid")
     else:
         return render(request, 'nlpclassification/sentiment_analysis.html')
+
+
+def text_generation_view(request):
+    if request.method == 'POST':
+        form = FillMask(request.POST)
+        if form.is_valid():
+            sentence = form.cleaned_data['sentence']
+            a = text_generation_model(sentence, max_length=50, num_return_sequences=5)
+            print(a)
+            return render(request, 'nlpclassification/text_generation.html', {'form': a})
+    else:
+        return render(request, 'nlpclassification/text_generation.html')
+
+
+def ner_view(request):
+    if request.method == 'POST':
+        form = FillMask(request.POST)
+        if form.is_valid():
+            sentence = form.cleaned_data['sentence']
+            a = named_entity_recognition_model(sentence)
+            return render(request, 'nlpclassification/ner.html', {'form': a})
+    else:
+        return render(request, 'nlpclassification/ner.html')

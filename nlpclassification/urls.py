@@ -8,4 +8,6 @@ urlpatterns = [
     path("masked-word/", views.masked_word, name='masked-word'),
     path("summarization/", views.summarization, name='summarization'),
     path("sentiment-analysis/", views.sentiment_analysis_view, name='sentiment-analysis'),
+    path("text-generation/", views.text_generation_view, name='text-generation'),
+    path('ner/', views.ner_view, name='ner'),
 ]

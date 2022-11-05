@@ -20,7 +20,7 @@ def text_generation_model(sentence: str, max_length=30, num_return_sequences=3):
     result = generator(sentence,
                        max_length=max_length,
                        num_return_sequences=num_return_sequences)
-    return result['generated_text']
+    return result
 
 
 def fill_mask_model(sentence: str = "This course will teach you all about <mask> models.", top_k=2):
@@ -41,12 +41,6 @@ def named_entity_recognition_model(sentence: str):
 def summarization_model(sentence: str):
     summarizer = pipeline("summarization")
     result = summarizer(sentence)
-    return result
-
-
-def translation_model(sentence):
-    translator = pipeline("translation", model="Helsinki-NLP/opus-mt-fr-en")
-    result = translator(sentence)
     return result
 
 
